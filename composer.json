@@ -1,0 +1,30 @@
+{
+    "name": "jirinapravnik/oauth2",
+    "description": "Implementace OAuth2 server pro Nette",
+    "keywords": ["nette", "oauth2"],
+    "type": "library",
+    "homepage": "https://github.com/jirinapravnik/oauth2",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jiří Nápravník",
+            "email": "jiri.napravnik@gmail.com",
+            "homepage": "http://jirinapravnik.cz"
+        }
+    ],
+    "support": {
+        "email": "jiri.napravnik@gmail.com",
+        "forum": "https://github.com/jirinapravnik/oauth2/issues"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "nette/di": "~2.2",
+        "bshaffer/oauth2-server-php": "~1.8",
+        "drahak/restful": "@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "JiriNapravnik\\": "src/"
+        }
+    }
+}
