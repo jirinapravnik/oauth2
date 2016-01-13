@@ -22,16 +22,16 @@ class OAuth2Extension extends \Nette\DI\CompilerExtension
 			'password' =>NULL,
 		]
 	];
-	
+
 	public function loadConfiguration()
 	{
 		$config = $this->getConfig($this->defaults);
-		
+
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('authentication'))
 			->setClass('JiriNapravnik\OAuth2\OAuth2Authentication');
-		
+
 		$databaseConfig = $config['database'];
 		$builder->addDefinition($this->prefix('server'))
 			->setClass('JiriNapravnik\OAuth2\OAuth2Server')

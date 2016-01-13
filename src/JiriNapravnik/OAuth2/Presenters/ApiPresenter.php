@@ -16,13 +16,14 @@ use OAuth2\Request;
 class ApiPresenter extends Presenter
 {
 	private $oauthServer;
-	
+
 	public function __construct(OAuth2Server $oauthServer){
+		parent::__construct();
 		$this->oauthServer = $oauthServer;
 	}
-	
+
 	public function actionToken(){
-		$this->oauthServer->getServer()->handleTokenRequest(Request::createFromGlobals())->send();		
+		$this->oauthServer->getServer()->handleTokenRequest(Request::createFromGlobals())->send();
 		$this->terminate();
 	}
 }

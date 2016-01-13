@@ -14,13 +14,13 @@ use OAuth2\Request;
  */
 class OAuth2Authentication extends AuthenticationProcess
 {
-	
+
 	private $oAuthServer;
 	private $request;
 
 	public function __construct(OAuth2Server $oAuthServer)
 	{
-		$this->oAuthServer = $oAuthServer->getServer();
+		$this->oAuthServer = $oAuthServer;
 	}
 
 	private function getRequest(){
@@ -29,7 +29,7 @@ class OAuth2Authentication extends AuthenticationProcess
 		}
 		return $this->request;
 	}
-	
+
 	/**
 	 * Authenticate request data
 	 * @param IInput $input
@@ -41,9 +41,9 @@ class OAuth2Authentication extends AuthenticationProcess
 	{
 		$request = $this->getRequest();
 		$headers = $request->headers('Authorization');
-		
-		$bearerName = $this->oAuthServer->getConfig('token_bearer_header_name');
-		
+
+		$bearerName = $this->oAuthServer->getServer()->getConfig('token_bearer_header_name');
+
 		if(count($headers) === 0 || preg_match('/' . $bearerName . '\s(\S+)/i', $headers, $matches) === 0){
 			throw new AuthenticationException('Invalid authorization header');
 		}
@@ -58,7 +58,7 @@ class OAuth2Authentication extends AuthenticationProcess
 	 */
 	protected function authRequestTimeout(IInput $input)
 	{
-		if($this->oAuthServer->verifyResourceRequest($this->getRequest()) === TRUE){
+		if ($this->oAuthServer->getServer()->verifyResourceRequest($this->getRequest()) === TRUE) {
 			return TRUE;
 		}
 		throw new AuthenticationException('Invalid or expired token');
